@@ -1,38 +1,83 @@
-.App {
+body {
+  font-family: arial;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+@media (min-width: 100%) {
+  .container {
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    grid-template-rows: auto 1fr auto;
+  }
+}
+
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
+@media (max-width: 765px) {
+  .wrapper {
+   all: unset;
+  }
+}
+
+.logo {
+  font-size: 1.4em;
+  color: white;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.nav-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
+}
+
+.nav-wrapper > ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+
+nav {
+  background-color: #f90;
+  padding: 5px 20px;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+ul > li {
+  align-self: center;
+  margin-right: 5px;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  
+}
+
+footer {
+  grid-column: span 3;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.4em;
+  background-color: #690;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+h1 {
+  margin-bottom: 1em;
+  font-size: 1.3em;
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.authButtons {
+  display: flex;
 }
