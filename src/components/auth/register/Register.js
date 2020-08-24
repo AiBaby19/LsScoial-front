@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Form from '../../forms/Form';
 import { register } from '../../../api/auth';
-import { saveToken } from '../../../utils/localStorage';
+import { saveInfo } from '../../../utils/localStorage';
 
 export default function () {
   const [values, setValues] = useState({ name: '', email: '', password: '' });
@@ -18,7 +18,7 @@ export default function () {
         return alert('Something is wrong')
     }
 
-    saveToken(userInfo);
+    saveInfo(userInfo);
 
     history.push('/');
   };

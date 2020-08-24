@@ -12,22 +12,16 @@ import Login from './components/auth/login/Login';
 import Register from './components/auth/register/Register';
 import GuardRoute from './utils/GuardRoute';
 import Home from './components/home/Home';
-import { deleteToken } from './utils/localStorage';
+import { deleteUserLS } from './utils/localStorage';
+import Modal from './components/modal/Modal';
+
 import './App.css';
 
 const App = () => {
   const store = useStore();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-
-  // to mobix
-  useEffect(() => {
-    if (!isLoggedIn) {
-      // autoAuthenticate();
-    }
-  }, []);
 
   const logout = () => {
-    deleteToken();
+    deleteUserLS();
     store.logout();
   };
 
@@ -63,7 +57,9 @@ const App = () => {
     <Router>
       <div className='container'>
         {renderNav()}
+        {store.modal && <Modal />}
         <main>
+        
           <div className='wrapper'>
             <Switch>
               <GuardRoute
