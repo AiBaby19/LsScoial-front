@@ -21,13 +21,18 @@ export function createStore() {
 
     chosenPost: null,
 
-    async getTenPosts() {
-      this.posts = await getTenPosts();
+    async getTenPosts(skip) {
+      const tenPosts = await getTenPosts(skip);
+
+      if (tenPosts?.status) {
+        return;
+      }
+      this.posts = [...this.posts, ...tenPosts];
     },
 
     async getPost(id) {
       const res = await getOne(id);
-      if (res?.error) {
+      if (res?.status) {
         return alert('something is wrong');
       }
       this.post = res;
@@ -35,7 +40,7 @@ export function createStore() {
 
     async addPost(post) {
       const res = await add(post);
-      if (res?.error) {
+      if (res?.status) {
         return alert('something is wrong');
       }
       this.posts.unshift(res);
@@ -44,7 +49,7 @@ export function createStore() {
     async updatePost(updatedPost) {
       const res = await update(updatedPost);
 
-      if (res?.error) {
+      if (res?.status) {
         return alert('something is wrong');
       }
       this.posts.forEach((post) => {
@@ -56,7 +61,7 @@ export function createStore() {
 
     async deletePost(id) {
       const res = await remove(id);
-      if (res?.error) {
+      if (res?.status) {
         return alert('something is wrong');
       }
       this.posts = this.posts.filter(({ _id }) => {

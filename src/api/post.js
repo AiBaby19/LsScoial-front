@@ -7,9 +7,9 @@ const tokenOption = () => {
   return { headers: { 'x-access-token': getToken() } };
 };
 
-export const getTenPosts = async () => {
+export const getTenPosts = async (skip) => {
   try {
-    const res = await fetch(`${URL}`, tokenOption());
+    const res = await fetch(`${URL}?skip=${skip}`, tokenOption());
     return await res.json();
   } catch (err) {
     throw err;
