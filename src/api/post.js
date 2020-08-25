@@ -62,3 +62,19 @@ export const remove = async (id) => {
     throw err;
   }
 };
+
+export const likeToggle = async (postId, userId) => {
+  try {
+    const res = await fetch(`${URL}/${postId}/like`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': getToken(),
+      },
+      body: JSON.stringify({userId}),
+    });
+    return await res.json();
+  } catch (err) {
+    throw err;
+  }
+};

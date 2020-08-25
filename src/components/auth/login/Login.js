@@ -18,20 +18,16 @@ export default function () {
 
     const userInfo = await login(values);
     if (!userInfo?.token) {
-      return alert('Something is wrong');
+      return alert(userInfo.message);
     }
 
     saveInfo(userInfo);
-
-    store.setUserName(userInfo.name);
-
     store.login();
-
-    history.push('/');
   };
 
   return (
     <div>
+      <p className='text-center'>Login</p>
       <Form values={values} setValues={setValues} submit={submit} />
     </div>
   );

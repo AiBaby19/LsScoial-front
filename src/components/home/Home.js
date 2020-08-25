@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocalStore, useObserver } from 'mobx-react';
 import PostList from '../postlist/PostList';
 import { useStore } from '../../store/postsContext';
 import styled from 'styled-components';
@@ -24,6 +23,7 @@ const InputBtn = styled.button`
 
 export default function () {
   const store = useStore();
+  console.log('HOME')
 
   return (
     <Container>

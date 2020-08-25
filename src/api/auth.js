@@ -6,8 +6,7 @@ export const register = async (data) => {
   try {
     const res = await fetch(`${URL}/register`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      body: data,
     });
     return await res.json();
   } catch (err) {
@@ -27,3 +26,16 @@ export const login = async (credentials) => {
     throw err;
   }
 };
+
+export const connectAuto = async (token) => {
+  try {
+    const res = await fetch(`${URL}/is-loggedIn`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({token}),
+    });
+    return await res.json();
+  } catch (err) {
+    throw err;
+  }
+}

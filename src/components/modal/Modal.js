@@ -70,7 +70,7 @@ export default function () {
 
   const addNewPost = () => {
     const post = {
-      user_id: getUserId(),
+      user: getUserId(),
       content,
       create_date: new Date(),
       edit_date: null,

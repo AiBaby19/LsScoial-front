@@ -2,7 +2,7 @@ body {
   font-family: arial;
 }
 
-.container{
+.container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -23,7 +23,7 @@ body {
 
 @media (max-width: 765px) {
   .wrapper {
-   all: unset;
+    all: unset;
   }
 }
 
@@ -46,7 +46,23 @@ body {
 
 nav {
   background-color: #f90;
+  color: white;
   padding: 5px 20px;
+}
+
+.authButtons {
+  display: flex;
+  justify-content: space-between;
+  width: 7em;
+}
+
+.authButtons > li {
+  align-self: center;
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
 
 main {
@@ -60,7 +76,6 @@ ul > li {
   font-size: 14px;
   text-decoration: none;
   cursor: pointer;
-  
 }
 
 footer {
@@ -76,8 +91,4 @@ h1 {
   margin-bottom: 1em;
   font-size: 1.3em;
   font-weight: bold;
-}
-
-.authButtons {
-  display: flex;
 }

@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useLocalStore, useObserver } from 'mobx-react';
+import React, { useEffect, useState, memo } from 'react';
+import { useObserver } from 'mobx-react';
 import { toJS } from 'mobx';
 
 import { useStore } from '../../store/postsContext';
@@ -8,12 +8,11 @@ import Post from './post/Post';
 export default function () {
   const [skip, setSkip] = useState(0);
   const store = useStore();
+  console.log('PostList')
 
   useEffect(() => {
     store.getTenPosts(skip);
   }, [skip]);
-
-  // console.log('load');
 
   const handleScroll = (e) => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target.body;
@@ -28,8 +27,10 @@ export default function () {
 
     return (
       <div className='post-list'>
-        {store.posts.length > 0 &&
-          posts.map((post, i) => <Post key={post._id} post={post} />)}
+        {store.posts.length > 0 ?
+          posts.map((post, i) => <Post key={post._id} post={post} />)
+        :
+        <p>0 Posts Published...</p>}
       </div>
     );
   });

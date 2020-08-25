@@ -1,17 +1,34 @@
-import { getTenPosts, getOne, add, update, remove } from '../api/post';
+import {
+  getTenPosts,
+  getOne,
+  add,
+  update,
+  remove,
+  likeToggle,
+} from '../api/post';
+
+import {connectAuto} from '../api/auth';
 
 export function createStore() {
   return {
-    //add checkTokenValidation(),
-
     //AUTH
-    isLoggedIn: true,
+    isLoggedIn: false,
+
+    async autoConnect(token) {
+      const res = await connectAuto(token);
+      if(res.userId) {
+        this.login();
+      }else {
+        this.logout();
+      }
+    },
 
     login() {
       this.isLoggedIn = true;
     },
     logout() {
       this.isLoggedIn = false;
+      this.posts = [];
     },
 
     //POSTS
@@ -33,7 +50,7 @@ export function createStore() {
     async getPost(id) {
       const res = await getOne(id);
       if (res?.status) {
-        return alert('something is wrong');
+        return alert(res.message);
       }
       this.post = res;
     },
@@ -41,7 +58,7 @@ export function createStore() {
     async addPost(post) {
       const res = await add(post);
       if (res?.status) {
-        return alert('something is wrong');
+        return alert(res.message);
       }
       this.posts.unshift(res);
     },
@@ -50,7 +67,7 @@ export function createStore() {
       const res = await update(updatedPost);
 
       if (res?.status) {
-        return alert('something is wrong');
+        return alert(res.message);
       }
       this.posts.forEach((post) => {
         if (post._id === res._id) {
@@ -62,7 +79,7 @@ export function createStore() {
     async deletePost(id) {
       const res = await remove(id);
       if (res?.status) {
-        return alert('something is wrong');
+        return alert(res.message);
       }
       this.posts = this.posts.filter(({ _id }) => {
         return !(id === _id);
@@ -73,13 +90,20 @@ export function createStore() {
       this.post = null;
     },
 
-    //UTILS
-    userName: null,
+    async toggleLike(postId, userId) {
+      const res = await likeToggle(postId, userId);
+      if (res?.status) {
+        return alert(res.message);
+      }
 
-    setUserName(name) {
-      this.userName = name;
+      this.posts.forEach((post) => {
+        if (post._id === postId) {
+          post.likes += res;
+        }
+      });
     },
 
+    //UTILS
     modal: false,
 
     toggleModal() {
