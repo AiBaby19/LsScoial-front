@@ -31,7 +31,7 @@ const App = () => {
 
   const logout = () => {
     deleteUserLS();
-
+    store.resetPosts();
     store.logout();
   };
 

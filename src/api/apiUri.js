@@ -1,1 +1,1 @@
-export default 'http://34.243.132.155/';
+export default 'http://34.243.132.155';

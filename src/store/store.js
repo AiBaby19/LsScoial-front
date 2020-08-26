@@ -36,8 +36,6 @@ export function createStore() {
 
     post: null,
 
-    chosenPost: null,
-
     async getTenPosts(skip) {
       const res = await getTenPosts(skip);
 
@@ -75,7 +73,7 @@ export function createStore() {
       } else {
         this.posts.forEach((post) => {
           if (post._id === res._id) {
-            post.content = res.content;
+            post = updatedPost;
           }
         });
         return true;
@@ -90,6 +88,10 @@ export function createStore() {
       this.posts = this.posts.filter(({ _id }) => {
         return !(id === _id);
       });
+    },
+
+    resetPosts() {
+      this.posts = [];
     },
 
     initModalPost() {
