@@ -71,7 +71,7 @@ export function createStore() {
         alert(res.message);
         return false;
       } else {
-        this.posts.forEach((post) => {
+        this.posts = this.posts.map((post) => {
           if (post._id === res._id) {
             post = updatedPost;
           }
