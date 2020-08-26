@@ -71,9 +71,10 @@ export function createStore() {
         alert(res.message);
         return false;
       } else {
-        this.posts = this.posts.map((post) => {
+        this.posts.forEach((post) => {
           if (post._id === res._id) {
-            post = updatedPost;
+            post.content = res.content;
+            post.edit_date = res.edit_date;
           }
         });
         return true;
