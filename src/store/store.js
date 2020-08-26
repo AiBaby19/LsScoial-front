@@ -12,7 +12,7 @@ import { connectAuto } from '../api/auth';
 export function createStore() {
   return {
     //AUTH
-    isLoggedIn: null,
+    isLoggedIn: false,
 
     async autoConnect(token) {
       const res = await connectAuto(token);
