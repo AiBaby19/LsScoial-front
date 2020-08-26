@@ -7,7 +7,7 @@ import {
   likeToggle,
 } from '../api/post';
 
-import {connectAuto} from '../api/auth';
+import { connectAuto } from '../api/auth';
 
 export function createStore() {
   return {
@@ -16,9 +16,9 @@ export function createStore() {
 
     async autoConnect(token) {
       const res = await connectAuto(token);
-      if(res.userId) {
+      if (res.userId) {
         this.login();
-      }else {
+      } else {
         this.logout();
       }
     },
@@ -39,20 +39,23 @@ export function createStore() {
     chosenPost: null,
 
     async getTenPosts(skip) {
-      const tenPosts = await getTenPosts(skip);
+      const res = await getTenPosts(skip);
 
-      if (tenPosts?.status) {
-        return;
+      if (res?.status) {
+        return alert(res.message);
       }
-      this.posts = [...this.posts, ...tenPosts];
+      this.posts = [...this.posts, ...res];
     },
 
     async getPost(id) {
       const res = await getOne(id);
       if (res?.status) {
-        return alert(res.message);
+        alert(res.message);
+        return false;
+      } else {
+        this.post = res;
+        return true;
       }
-      this.post = res;
     },
 
     async addPost(post) {
@@ -67,13 +70,16 @@ export function createStore() {
       const res = await update(updatedPost);
 
       if (res?.status) {
-        return alert(res.message);
+        alert(res.message);
+        return false;
+      } else {
+        this.posts.forEach((post) => {
+          if (post._id === res._id) {
+            post.content = res.content;
+          }
+        });
+        return true;
       }
-      this.posts.forEach((post) => {
-        if (post._id === res._id) {
-          post.content = res.content;
-        }
-      });
     },
 
     async deletePost(id) {

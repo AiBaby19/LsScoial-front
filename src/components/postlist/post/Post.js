@@ -23,18 +23,19 @@ const Img = styled.img`
 
 export default function ({ post }) {
   const store = useStore();
-  const {content, create_date, likes, _id, user } = post;
-  console.log('Post')
+  const { content, create_date, edit_date, likes, _id, user } = post;
+
   const updatePost = async () => {
-    if (getUserId() !== user._id) {
-      return;
-    }
-    await store.getPost(_id);
+    if (getUserId() !== user._id) return;
+
+    const isPost = await store.getPost(_id);
+
+    if (!isPost) return;
+
     store.toggleModal();
   };
 
   const toggleLike = async () => {
-
     await store.toggleLike(_id, getUserId());
   };
 
@@ -58,8 +59,11 @@ export default function ({ post }) {
         )}
       </div>
 
-      <p className='mt-4'>{content}</p>
+      <p className='mt-4 word-wrap'>{content}</p>
       <Like likes={likes} toggleLike={toggleLike} />
+      {getUserId() === user._id && edit_date && (
+        <p className='date pt-3 text-right'>Edited at {edit_date}</p>
+      )}
     </Container>
   );
 }

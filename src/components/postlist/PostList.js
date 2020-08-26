@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useObserver } from 'mobx-react';
 import { toJS } from 'mobx';
 
@@ -8,11 +8,14 @@ import Post from './post/Post';
 export default function () {
   const [skip, setSkip] = useState(0);
   const store = useStore();
-  console.log('PostList')
 
   useEffect(() => {
     store.getTenPosts(skip);
   }, [skip]);
+
+  useEffect(() => {
+    return () => {console.log('')};
+  }, []);
 
   const handleScroll = (e) => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target.body;

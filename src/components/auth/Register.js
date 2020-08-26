@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import Form from '../forms/Form';
 import { register } from '../../api/auth';
 import { saveInfo } from '../../utils/localStorage';
@@ -12,7 +11,6 @@ export default function (props) {
     name: '',
     image: '',
   });
-  const history = useHistory();
   const store = useStore();
 
   const submit = async () => {

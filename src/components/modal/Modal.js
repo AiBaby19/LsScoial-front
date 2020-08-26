@@ -52,6 +52,10 @@ export default function () {
     }
   }, []);
 
+  useEffect(() => {
+    return () => {console.log('')};
+  }, []);
+
   const submitPost = () => {
     store.post ? updatePost() : addNewPost();
     store.toggleModal();
@@ -60,8 +64,7 @@ export default function () {
   const updatePost = () => {
     const post = {
       ...store.post,
-      content,
-      edit_date: new Date(),
+      content
     };
    
     store.updatePost(post);

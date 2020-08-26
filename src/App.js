@@ -1,3 +1,6 @@
+//prevent "configured observer batching" error
+import 'mobx-react-lite/batchingForReactDom';
+
 import React, { useEffect } from 'react';
 import { useObserver } from 'mobx-react';
 import { useStore } from './store/postsContext';
@@ -6,9 +9,8 @@ import Login from './components/auth/login/Login';
 import Register from './components/auth/Register';
 import GuardRoute from './utils/GuardRoute';
 import Home from './components/home/Home';
-import { deleteUserLS, getToken } from './utils/localStorage';
+import { deleteUserLS, getToken, getUserName } from './utils/localStorage';
 import Modal from './components/modal/Modal';
-
 import './App.css';
 
 const App = () => {
@@ -16,7 +18,11 @@ const App = () => {
   useEffect(() => {
     autoConnect();
   }, []);
-console.log('APP')
+
+  useEffect(() => {
+    return () => {console.log('')};
+  }, []);
+
   const autoConnect = () => {
     const token = getToken();
     if (!token) return;
@@ -37,18 +43,28 @@ console.log('APP')
             <p>LsSocial</p>
           </div>
           <ul>
-            {store.isLoggedIn ? (
-              <li onClick={logout}>Logout</li>
-            ) : (
-              <span className='authButtons'>
-                <li>
-                  <Link to='/login'>Login</Link>
-                </li>
-                <li>
-                  <Link to='/register'>Register</Link>
-                </li>
-              </span>
-            )}
+            <span className='authButtons'>
+              {store.isLoggedIn ? (
+                <>
+                  <li>
+                    <i className='fas fa-user'></i>
+                    {getUserName()}
+                  </li>
+                  <li className='pointer' onClick={logout}>
+                   Logout
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link to='/login'>Login</Link>
+                  </li>
+                  <li>
+                    <Link to='/register'>Register</Link>
+                  </li>
+                </>
+              )}
+            </span>
           </ul>
         </div>
       </nav>

@@ -23,7 +23,6 @@ const InputBtn = styled.button`
 
 export default function () {
   const store = useStore();
-  console.log('HOME')
 
   return (
     <Container>
