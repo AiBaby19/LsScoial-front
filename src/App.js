@@ -76,7 +76,7 @@ const App = () => {
       <div className='container'>
         {renderNav()}
         {store.modal && <Modal />}
-        <main>
+        {store.isLoggedIn !== null && (<main>
           <div className='wrapper'>
             <Switch>
               <GuardRoute
@@ -100,7 +100,7 @@ const App = () => {
               />
             </Switch>
           </div>
-        </main>
+        </main>)}
       </div>
     </Router>
   ));

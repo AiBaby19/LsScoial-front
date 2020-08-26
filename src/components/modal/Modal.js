@@ -13,8 +13,7 @@ const BackGround = styled.div`
 const ModalWrapper = styled.div`
   display: gird;
   margin: 7em auto;
-  min-height: 60%;
-  height: auto;
+  height: 18em;
   width: 80%;
   border-radius: 5px;
   background-color: white;
@@ -30,8 +29,8 @@ const Content = styled.textarea`
   border: none;
   width 90%;
   margin: 0 auto;
-  min-height: 18em;
   height: auto;
+  min-height: 9em;
   overflow: auto;
   resize: none;
 `;
@@ -40,6 +39,9 @@ const Button = styled.button`
   height: 50px;
   font-size: 20px;
   cursor: pointer;
+  background-color: #388e8e;
+  color: white;
+  border: none;
 `;
 
 export default function () {
