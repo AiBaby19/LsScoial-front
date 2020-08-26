@@ -64,6 +64,9 @@ export default function () {
   };
 
   const updatePost = () => {
+    if (store.post.content === content) {
+      return;
+    }
     const post = {
       ...store.post,
       content
